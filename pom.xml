@@ -78,7 +78,11 @@
             <artifactId>jersey-container-grizzly2-http</artifactId>
             <version>${jersey.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>7.1.1.Final</version>
+        </dependency>
         <!-- JSON / Validation -->
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
@@ -141,15 +145,6 @@
         <finalName>starter</finalName>
         
         <plugins>
-            <!-- Payara Micro (optional but helpful for quick dev runs) -->
-            <plugin>
-                <groupId>fish.payara.maven.plugins</groupId>
-                <artifactId>payara-micro-maven-plugin</artifactId>
-                <version>1.0.7</version>
-                <configuration>
-                    <deployWar>true</deployWar>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
