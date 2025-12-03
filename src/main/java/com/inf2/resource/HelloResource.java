@@ -10,17 +10,13 @@ import jakarta.ws.rs.core.Response;
 @Path("hello")
 public class HelloResource {
 
-    // Inject a Provider for the Service, ensuring it's fetched when needed.
     @Inject
-    private HelloService helloServiceProvider;
+    private HelloService helloService;
 
     @GET
     public Response greet(@QueryParam("name") String name) {
 
         try {
-            // Retrieve the service instance via the Provider
-            HelloService helloService = helloServiceProvider;
-
             String greeting = helloService.saveGreeting(name);
 
             return Response.ok(greeting).build();

@@ -1,7 +1,9 @@
 package com.inf2;
 
 import com.inf2.dao.impl.HelloDAOImpl;
+import com.inf2.dao.impl.UserDAOImpl;
 import com.inf2.service.HelloService;
+import com.inf2.service.UserService;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.internal.inject.AbstractBinder;
@@ -35,9 +37,10 @@ public class Main {
                         bind(emf).to(EntityManagerFactory.class).in(jakarta.inject.Singleton.class);
 // 3. Bind the SPECIFIC DAO Implementation to its Interface
                         bind(HelloDAOImpl.class).to(HelloDAOImpl.class).in(jakarta.inject.Singleton.class);
-
+                        bind(UserDAOImpl.class).to(UserDAOImpl.class).in(jakarta.inject.Singleton.class);
 // 4. Bind the Service (optional if scanning is reliable)
                         bind(HelloService.class).to(HelloService.class).in(jakarta.inject.Singleton.class);
+                        bind(UserService.class).to(UserService.class).in(jakarta.inject.Singleton.class);
                     }
                 });
 
