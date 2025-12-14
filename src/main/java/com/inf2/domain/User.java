@@ -6,8 +6,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
-@Entity
-@Table(name = "users")
+@MappedSuperclass
 public class User { //step 1 : define what user entity looks like
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -52,6 +51,10 @@ public class User { //step 1 : define what user entity looks like
 
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

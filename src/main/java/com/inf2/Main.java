@@ -1,9 +1,11 @@
 package com.inf2;
 
+import com.inf2.dao.impl.AdvisorDAOImpl;
 import com.inf2.dao.impl.HelloDAOImpl;
-import com.inf2.dao.impl.UserDAOImpl;
+import com.inf2.dao.impl.ClientDAOImpl;
+import com.inf2.service.AdvisorService;
 import com.inf2.service.HelloService;
-import com.inf2.service.UserService;
+import com.inf2.service.ClientService;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.internal.inject.AbstractBinder;
@@ -37,13 +39,15 @@ public class Main {
                         bind(emf).to(EntityManagerFactory.class).in(jakarta.inject.Singleton.class);
 // 3. Bind the SPECIFIC DAO Implementation to its Interface
                         bind(HelloDAOImpl.class).to(HelloDAOImpl.class).in(jakarta.inject.Singleton.class);
-                        bind(UserDAOImpl.class).to(UserDAOImpl.class).in(jakarta.inject.Singleton.class);
+                        bind(ClientDAOImpl.class).to(ClientDAOImpl.class).in(jakarta.inject.Singleton.class);
+                        bind(AdvisorDAOImpl.class).to(AdvisorDAOImpl.class).in(jakarta.inject.Singleton.class);
 // 4. Bind the Service (optional if scanning is reliable)
                         bind(HelloService.class).to(HelloService.class).in(jakarta.inject.Singleton.class);
-                        bind(UserService.class).to(UserService.class).in(jakarta.inject.Singleton.class);
+                        bind(ClientService.class).to(ClientService.class).in(jakarta.inject.Singleton.class);
+                        bind(AdvisorService.class).to(AdvisorService.class).in(jakarta.inject.Singleton.class);
                     }
                 });
-
+//resources are auto-binded so no need to bind them here
 
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
