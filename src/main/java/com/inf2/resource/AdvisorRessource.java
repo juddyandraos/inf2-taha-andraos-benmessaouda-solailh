@@ -1,7 +1,7 @@
 package com.inf2.resource;
 
 import com.inf2.domain.Advisor;
-import com.inf2.dto.user.UserCreateRequest;
+import com.inf2.dto.user.AdvisorCreateRequest;
 import com.inf2.dto.user.UserUpdateRequest;
 import com.inf2.service.AdvisorService;
 import jakarta.inject.Inject;
@@ -17,9 +17,9 @@ public class AdvisorRessource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createAdvisor(UserCreateRequest user) {
+    public Response createAdvisor(AdvisorCreateRequest advisor) {
         try {
-            advisorService.createAdvisor(user);
+            advisorService.createAdvisor(advisor);
             return Response.status(Response.Status.CREATED).build();
         } catch (RuntimeException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();

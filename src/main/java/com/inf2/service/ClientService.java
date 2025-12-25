@@ -2,6 +2,7 @@ package com.inf2.service;
 
 import com.inf2.dao.impl.ClientDAOImpl;
 import com.inf2.domain.Client;
+import com.inf2.dto.user.ClientCreateRequest;
 import com.inf2.dto.user.UserCreateRequest;
 import com.inf2.dto.user.UserUpdateRequest;
 import jakarta.inject.Inject;
@@ -9,7 +10,9 @@ import jakarta.inject.Singleton;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
+import org.mindrot.jbcrypt.BCrypt;
 
+import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import java.util.UUID;
 
 // step 3 : logique métier - où j'implémente les contraintes métiers
@@ -21,14 +24,16 @@ public class ClientService {
     @Inject
     private ClientDAOImpl userDAO;
 
-    public Client createClient(UserCreateRequest userCreateRequest) {
+    public Client createClient(ClientCreateRequest clientCreateRequest) {
         EntityManager em = null;
 
         try {
             em = emf.createEntityManager();
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
-            Client user = new Client(userCreateRequest.getFirstName(), userCreateRequest.getLastName(), userCreateRequest.getEmail(), userCreateRequest.getPassword(), userCreateRequest.getDateOfBirth());
+            Client user = new Client(clientCreateRequest.getFirstName(), clientCreateRequest.getLastName(), clientCreateRequest.getEmail(), clientCreateRequest.getPassword(), clientCreateRequest.getDateOfBirth(), clientCreateRequest.getPhoneNumber());
+            String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+            user.setPassword(hashedPassword);
             userDAO.save(em, user);
             transaction.commit();
             return user;

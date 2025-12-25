@@ -1,49 +1,30 @@
-package com.inf2.domain;
+package com.inf2.dto.user;
 
-
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.UUID;
 
-@MappedSuperclass
-public class User { //step 1 : define what user entity looks like
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-
-    @NotNull (message = "First name is required")
+public class ClientCreateRequest {
     private String firstName;
-
-    @NotNull (message = "Last name is required")
     private String lastName;
-
-    @NotNull (message = "Email is required")
-    @Email (message = "Please provide a valid email address")
     private String email;
-
-    @NotNull (message = "Password is required")
     private String password;
-
-    @NotNull (message = "Date of  birth is required")
     private Date dateOfBirth;
+    private LocalDateTime joinDate;
+    private String phoneNumber;
 
-    public User() {
+    public ClientCreateRequest() {}
 
-    }
-
-    public User(String firstName, String lastName, String email, String password, Date dateOfBirth) {
+    public ClientCreateRequest(String firstName, String lastName, String email, String password, Date dateOfBirth, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public UUID getId() {
-        return id;
+        this.phoneNumber = phoneNumber;
+        this.joinDate = LocalDateTime.now();
     }
 
     public String getFirstName() {
@@ -81,4 +62,16 @@ public class User { //step 1 : define what user entity looks like
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public LocalDateTime getJoinDate() { return joinDate; }
+
+    public void setJoinDate(LocalDateTime joinDate) { this.joinDate = joinDate; }
+
+    public String getPhoneNumber() { return phoneNumber; }
+
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 }

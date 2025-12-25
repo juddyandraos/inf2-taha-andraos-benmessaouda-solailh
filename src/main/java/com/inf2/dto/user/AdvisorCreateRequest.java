@@ -1,49 +1,24 @@
-package com.inf2.domain;
-
-
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
+package com.inf2.dto.user;
 
 import java.util.Date;
-import java.util.UUID;
 
-@MappedSuperclass
-public class User { //step 1 : define what user entity looks like
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-
-    @NotNull (message = "First name is required")
+public class AdvisorCreateRequest {
     private String firstName;
-
-    @NotNull (message = "Last name is required")
     private String lastName;
-
-    @NotNull (message = "Email is required")
-    @Email (message = "Please provide a valid email address")
     private String email;
-
-    @NotNull (message = "Password is required")
     private String password;
-
-    @NotNull (message = "Date of  birth is required")
     private Date dateOfBirth;
+    private String departmentCode;
 
-    public User() {
+    public AdvisorCreateRequest() {}
 
-    }
-
-    public User(String firstName, String lastName, String email, String password, Date dateOfBirth) {
+    public AdvisorCreateRequest(String firstName, String lastName, String email, String password, Date dateOfBirth, String departmentCode) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public UUID getId() {
-        return id;
+        this.departmentCode = departmentCode;
     }
 
     public String getFirstName() {
@@ -81,4 +56,12 @@ public class User { //step 1 : define what user entity looks like
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getDepartmentCode() { return departmentCode; }
+
+    public void setDepartmentCode(String departmentCode) { this.departmentCode = departmentCode; }
 }

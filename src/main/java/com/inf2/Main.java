@@ -3,9 +3,8 @@ package com.inf2;
 import com.inf2.dao.impl.AdvisorDAOImpl;
 import com.inf2.dao.impl.HelloDAOImpl;
 import com.inf2.dao.impl.ClientDAOImpl;
-import com.inf2.service.AdvisorService;
-import com.inf2.service.HelloService;
-import com.inf2.service.ClientService;
+import com.inf2.service.*;
+import io.smallrye.jwt.auth.principal.JWTParser;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.internal.inject.AbstractBinder;
@@ -14,6 +13,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import java.net.URI;
 
 public class Main {
@@ -33,6 +33,7 @@ public class Main {
                 .packages("com.inf2.domain")
                 .packages("com.inf2.resource")
                 .packages("com.inf2.service")
+                .packages("com.inf2.filter")
                 .register(new AbstractBinder() {
                     @Override
                     protected void configure() {
@@ -42,9 +43,11 @@ public class Main {
                         bind(ClientDAOImpl.class).to(ClientDAOImpl.class).in(jakarta.inject.Singleton.class);
                         bind(AdvisorDAOImpl.class).to(AdvisorDAOImpl.class).in(jakarta.inject.Singleton.class);
 // 4. Bind the Service (optional if scanning is reliable)
+                        bind(TokenService.class).to(TokenService.class).in(jakarta.inject.Singleton.class);
                         bind(HelloService.class).to(HelloService.class).in(jakarta.inject.Singleton.class);
                         bind(ClientService.class).to(ClientService.class).in(jakarta.inject.Singleton.class);
                         bind(AdvisorService.class).to(AdvisorService.class).in(jakarta.inject.Singleton.class);
+                        bind(AuthService.class).to(AuthService.class).in(jakarta.inject.Singleton.class);
                     }
                 });
 //resources are auto-binded so no need to bind them here

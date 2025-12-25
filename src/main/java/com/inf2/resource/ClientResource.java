@@ -1,8 +1,10 @@
 package com.inf2.resource;
 
 import com.inf2.domain.Client;
+import com.inf2.dto.user.ClientCreateRequest;
 import com.inf2.dto.user.UserCreateRequest;
 import com.inf2.dto.user.UserUpdateRequest;
+import com.inf2.filter.Secured;
 import com.inf2.service.ClientService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -19,10 +21,11 @@ public class ClientResource {
     private ClientService clientService;
 
     @POST
+    @Secured
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createClient(UserCreateRequest user) {
+    public Response createClient(ClientCreateRequest client) {
         try {
-            clientService.createClient(user);
+            clientService.createClient(client);
             return Response.status(Response.Status.CREATED).build();
         } catch (RuntimeException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();

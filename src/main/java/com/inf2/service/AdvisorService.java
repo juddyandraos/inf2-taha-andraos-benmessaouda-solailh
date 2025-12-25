@@ -2,13 +2,14 @@ package com.inf2.service;
 
 import com.inf2.dao.impl.AdvisorDAOImpl;
 import com.inf2.domain.Advisor;
-import com.inf2.dto.user.UserCreateRequest;
+import com.inf2.dto.user.AdvisorCreateRequest;
 import com.inf2.dto.user.UserUpdateRequest;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.UUID;
 
@@ -20,14 +21,22 @@ public class AdvisorService {
     @Inject
     private AdvisorDAOImpl advisorDAO;
 
-    public Advisor createAdvisor(UserCreateRequest userCreateRequest) {
+    public Advisor createAdvisor(AdvisorCreateRequest advisorCreateRequest) {
         EntityManager em = null;
 
         try {
             em = emf.createEntityManager();
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
-            Advisor user = new Advisor(userCreateRequest.getFirstName(), userCreateRequest.getLastName(), userCreateRequest.getEmail(), userCreateRequest.getPassword(), userCreateRequest.getDateOfBirth());
+            Advisor user = new Advisor(
+                    advisorCreateRequest.getFirstName(),
+                    advisorCreateRequest.getLastName(),
+                    advisorCreateRequest.getEmail(),
+                    advisorCreateRequest.getPassword(),
+                    advisorCreateRequest.getDateOfBirth(),
+                    advisorCreateRequest.getDepartmentCode());
+            String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+            user.setPassword(hashedPassword);
             advisorDAO.save(em, user);
             transaction.commit();
             return user;
