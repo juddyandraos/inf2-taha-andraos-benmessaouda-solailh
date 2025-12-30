@@ -1,0 +1,14 @@
+package com.inf2.dao;
+
+import com.inf2.domain.Client;
+import com.inf2.dto.auth.UserUpdateRequest;
+
+import java.util.UUID;
+
+public interface ClientDAO {
+    Client find(UUID id);
+    Client findByEmail(String email) ;
+    Client save(Client user);
+    void update(UUID id, UserUpdateRequest userUpdateRequest);
+    void delete(UUID id);
+}

@@ -1,11 +1,9 @@
 package com.inf2.resource;
 
 import com.inf2.domain.Client;
-import com.inf2.dto.user.ClientCreateRequest;
-import com.inf2.dto.user.UserCreateRequest;
-import com.inf2.dto.user.UserUpdateRequest;
-import com.inf2.filter.Secured;
-import com.inf2.service.ClientService;
+import com.inf2.dto.Client.ClientCreateRequest;
+import com.inf2.dto.auth.UserUpdateRequest;
+import com.inf2.service.domain.ClientService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -21,7 +19,6 @@ public class ClientResource {
     private ClientService clientService;
 
     @POST
-    @Secured
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createClient(ClientCreateRequest client) {
         try {

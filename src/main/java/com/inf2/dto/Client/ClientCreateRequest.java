@@ -1,22 +1,27 @@
-package com.inf2.dto.user;
+package com.inf2.dto.Client;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
-public class UserCreateRequest {
+public class ClientCreateRequest {
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private Date dateOfBirth;
+    private LocalDateTime joinDate;
+    private String phoneNumber;
 
-    public UserCreateRequest() {}
+    public ClientCreateRequest() {}
 
-    public UserCreateRequest(String firstName, String lastName, String email, String password, Date dateOfBirth) {
+    public ClientCreateRequest(String firstName, String lastName, String email, String password, Date dateOfBirth, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
+        this.phoneNumber = phoneNumber;
+        this.joinDate = LocalDateTime.now();
     }
 
     public String getFirstName() {
@@ -58,4 +63,12 @@ public class UserCreateRequest {
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+
+    public LocalDateTime getJoinDate() { return joinDate; }
+
+    public void setJoinDate(LocalDateTime joinDate) { this.joinDate = joinDate; }
+
+    public String getPhoneNumber() { return phoneNumber; }
+
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 }

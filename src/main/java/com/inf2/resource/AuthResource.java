@@ -1,9 +1,9 @@
 package com.inf2.resource;
 
-import com.inf2.dto.user.JwkKeyDTO;
-import com.inf2.dto.user.JwksResponseDTO;
-import com.inf2.dto.user.LoginRequest;
-import com.inf2.service.AuthService;
+import com.inf2.dto.auth.JwkKeyDTO;
+import com.inf2.dto.auth.JwksResponseDTO;
+import com.inf2.dto.auth.LoginRequest;
+import com.inf2.service.auth.AuthService;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;

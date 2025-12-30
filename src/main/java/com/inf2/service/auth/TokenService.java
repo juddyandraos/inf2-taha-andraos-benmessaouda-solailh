@@ -1,4 +1,4 @@
-package com.inf2.service;
+package com.inf2.service.auth;
 
 import io.smallrye.jwt.build.Jwt;
 import org.eclipse.microprofile.config.inject.ConfigProperty;

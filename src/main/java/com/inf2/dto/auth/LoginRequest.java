@@ -1,4 +1,4 @@
-package com.inf2.dto.user;
+package com.inf2.dto.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

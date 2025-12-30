@@ -1,4 +1,4 @@
-package com.inf2.dto.user;
+package com.inf2.dto.auth;
 
 
 public class UserUpdateRequest {

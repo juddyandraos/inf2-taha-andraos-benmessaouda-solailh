@@ -4,5 +4,5 @@ import com.inf2.domain.HelloMessage;
 import jakarta.persistence.EntityManager;
 
 public interface HelloDAO {
-    HelloMessage save(EntityManager em, HelloMessage message);
+    HelloMessage save(HelloMessage message);
 }

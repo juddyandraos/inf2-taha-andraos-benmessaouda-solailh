@@ -1,9 +1,9 @@
 package com.inf2.resource;
 
 import com.inf2.domain.Advisor;
-import com.inf2.dto.user.AdvisorCreateRequest;
-import com.inf2.dto.user.UserUpdateRequest;
-import com.inf2.service.AdvisorService;
+import com.inf2.dto.advisor.AdvisorCreateRequest;
+import com.inf2.dto.auth.UserUpdateRequest;
+import com.inf2.service.domain.AdvisorService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
